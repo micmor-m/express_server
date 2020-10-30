@@ -17,8 +17,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //can be use as any middleware
 //the order of the routes still matter
-app.use(adminRoutes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+
+//to catch all routes not defined in our project
+app.use((req, res, next) => {
+  res.status(404);
+  res.send("Page not found");
+});
 
 //start server
 app.listen(3000, () => {
