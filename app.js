@@ -18,12 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //can be use as any middleware
 //the order of the routes still matter
 app.use(adminRoutes);
-
-app.use("/", (req, res, next) => {
-  console.log("I always run!");
-  next();
-});
-
 app.use(shopRoutes);
 
 //start server
