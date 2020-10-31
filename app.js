@@ -16,7 +16,8 @@ const shopRoutes = require("./routes/shop");
 
 //use body parser (works with HTML form and JSON but not with file)
 app.use(bodyParser.urlencoded({ extended: false }));
-
+//express middleware for use static file eg css style sheet
+app.use(express.static(path.join(__dirname, "public")));
 //can be use as any middleware
 //the order of the routes still matter
 app.use("/admin", adminRoutes);
