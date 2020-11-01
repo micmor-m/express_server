@@ -4,6 +4,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const products = [];
+
 router.get("/add-product", (req, res, next) => {
   //using path is better that manually concatenate the path because
   //in linux the path uses /
@@ -13,8 +15,13 @@ router.get("/add-product", (req, res, next) => {
 });
 
 router.post("/add-product", (req, res, next) => {
-  console.log(req.body);
+  products.push({ title: req.body.title });
   res.redirect("/");
 });
 
-module.exports = router;
+//module.exports = router;
+
+//this way to export create an object with the name the file + Data and key the name of the variable
+//eg adminData.routes
+exports.routes = router;
+exports.products = products;

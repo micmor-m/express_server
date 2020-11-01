@@ -10,8 +10,12 @@ const bodyParser = require("body-parser");
 //create express application
 const app = express();
 
+//to set global variable in express
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 //import my functions
-const adminRoutes = require("./routes/admin");
+const adminData = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 //use body parser (works with HTML form and JSON but not with file)
@@ -20,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 //can be use as any middleware
 //the order of the routes still matter
-app.use("/admin", adminRoutes);
+app.use("/admin", adminData.routes);
 app.use(shopRoutes);
 
 //to catch all routes not defined in our project
