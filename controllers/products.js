@@ -1,4 +1,5 @@
-const products = [];
+//const products = [];
+const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
   //using path is better that manually concatenate the path because
@@ -13,7 +14,9 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  products.push({ title: req.body.title });
+  // products.push({ title: req.body.title });
+  const product = new Product(req.body.title);
+  product.save();
   res.redirect("/");
 };
 
@@ -23,6 +26,8 @@ exports.getProducts = (req, res, next) => {
   //in window the path uses \
   //therefore the app may not work in different OS
   //res.sendFile(path.join(__dirname, "..", "views", "shop.html"));
+
+  const products = Product.fetchAll();
 
   //const products = adminData.products;
   //to render a page using a templete use express function res.render
