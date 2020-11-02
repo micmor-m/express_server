@@ -18,6 +18,7 @@ app.set("views", path.join(__dirname, "views"));
 //const adminData = require("./routes/admin");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const errorController = require("./controllers/error");
 
 //use body parser (works with HTML form and JSON but not with file)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,12 +31,7 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 //to catch all routes not defined in our project
-app.use((req, res, next) => {
-  res.status(404);
-  //res.send("Page not found");
-  //res.sendFile(path.join(__dirname, "views", "not-found.html"));
-  res.render("not-found", { pageTitle: "Page Not Found", path: "" });
-});
+app.use(errorController.getError);
 
 //start server
 app.listen(3000, () => {
