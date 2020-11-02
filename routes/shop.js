@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
 
   const products = adminData.products;
   //to render a page using a templete use express function res.render
-  res.render("shop", { prods: products, docTitle: "Shop" });
+  res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
 });
 
 module.exports = router;

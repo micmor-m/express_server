@@ -11,7 +11,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 //to set global variable in express
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 //import my functions
@@ -31,7 +31,8 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
   res.status(404);
   //res.send("Page not found");
-  res.sendFile(path.join(__dirname, "views", "not-found.html"));
+  //res.sendFile(path.join(__dirname, "views", "not-found.html"));
+  res.render("not-found", { pageTitle: "Page Not Found", path: "" });
 });
 
 //start server
