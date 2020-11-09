@@ -1,12 +1,6 @@
-//const products = [];
 const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
-  //using path is better that manually concatenate the path because
-  //in linux the path uses /
-  //in window the path uses \
-  //therefore the app may not work in different OS
-  //res.sendFile(path.join(__dirname, "..", "views", "add-product.html"));
   res.render("add-product", {
     pageTitle: "Add product",
     path: "/admin/add-product",
@@ -18,18 +12,12 @@ exports.postAddProduct = (req, res, next) => {
   const product = new Product(req.body.title);
   product.save();
   res.redirect("/");
+  //res.reder("/");
 };
 
 exports.getProducts = (req, res, next) => {
-  //using path is better that manually concatenate the path because
-  //in linux the path uses /
-  //in window the path uses \
-  //therefore the app may not work in different OS
-  //res.sendFile(path.join(__dirname, "..", "views", "shop.html"));
-
-  const products = Product.fetchAll();
-
-  //const products = adminData.products;
-  //to render a page using a templete use express function res.render
-  res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
+  Product.fetchAll((products) => {
+    //console.log("products from conroller", products);
+    res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
+  });
 };

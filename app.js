@@ -1,5 +1,4 @@
 //import core module
-//const http = require("http");
 
 //import 3rd party packages
 //path allow to declare a relative path starting from the folder project
@@ -15,18 +14,13 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 //import my functions
-//const adminData = require("./routes/admin");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const errorController = require("./controllers/error");
 
 //use body parser (works with HTML form and JSON but not with file)
 app.use(bodyParser.urlencoded({ extended: false }));
-//express middleware for use static file eg css style sheet
 app.use(express.static(path.join(__dirname, "public")));
-//can be use as any middleware
-//the order of the routes still matter
-//app.use("/admin", adminData.routes);
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
@@ -34,6 +28,6 @@ app.use(shopRoutes);
 app.use(errorController.getError);
 
 //start server
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Server running on port 3000");
 });
