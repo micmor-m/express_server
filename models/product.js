@@ -25,6 +25,7 @@ module.exports = class Product {
   }
 
   save() {
+    this.id = Math.random().toString();
     getProductFromFile((products) => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), (err) => {
@@ -36,5 +37,12 @@ module.exports = class Product {
   //the key word STATIC is used to call fetchAll for the class itself not the instance
   static fetchAll(cb) {
     getProductFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getProductFromFile((products) => {
+      const product = products.find((product) => product.id === id);
+      cb(product);
+    });
   }
 };
